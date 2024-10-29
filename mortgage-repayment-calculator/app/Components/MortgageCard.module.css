@@ -1,0 +1,36 @@
+.mortgageCard {
+  position: absolute;
+  background-color: #ffffff;
+  left: 50%; /* left and top 50% makes top left corner of div centerized but that doesnt totally make div centerized*/
+  top: 50%;
+  transform: translate(-50%, -50%); /* For truely centerize the div*/
+  width: 900px;
+  height: 500px;
+  display: flex;
+  border-radius: 30px;
+}
+.calculationTab {
+  padding: 30px;
+  width: 50%;
+}
+.resultTab {
+  background-color: hsl(201, 54%, 16%);
+  width: 50%;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 60px;
+}
+.mortgageTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.mortgageClear {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 15px;
+}

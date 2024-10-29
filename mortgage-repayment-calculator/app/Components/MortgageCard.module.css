@@ -84,3 +84,8 @@
 .inputWrapper:focus-within .currencyIcon {
   background-color: hsl(62, 71%, 53%);
 }
+.currencyLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: hsl(200, 7%, 52%);
+}

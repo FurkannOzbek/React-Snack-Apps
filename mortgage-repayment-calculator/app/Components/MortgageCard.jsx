@@ -35,7 +35,7 @@ export default function MortgageCard() {
           </div>
 
           <form className={styles.mortgageForm} onSubmit={formSubmit}>
-            <label>Mortgage Amount</label>
+            <label className={styles.currencyLabel}>Mortgage Amount</label>
             <div className={styles.inputWrapper}>
               <span className={styles.currencyIcon}> £ </span>
               <input

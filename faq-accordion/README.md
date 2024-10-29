@@ -13,17 +13,15 @@ This is a solution to the [Interactive rating component challenge on Frontend Me
   - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
 
-
 ## Overview
 
 ### The Challange
 
-Users are able to  :
+Users are able to :
 
 - View the FAQ section optimized for any device screen size
 - Experience hover effects for interactive elements
 - Expand questions to read the corresponding answers
-
 
 ### Screenshots
 
@@ -36,7 +34,6 @@ Users are able to  :
 - Challange URL : https://www.frontendmentor.io/challenges/faq-accordion-wyfFdeBwBz/hub
 - Live Site URL : https://faq-accordion-beige-tau.vercel.app
 
-
 ## My process
 
 ### Built with
@@ -45,24 +42,26 @@ Users are able to  :
 - NextJS
 - CSS
 
-### What I learned 
+### What I learned
 
 I practiced making active state for one or more elements.
+
 ```js
 const toggleItem = (index) => {
-    setActiveIndexs(
-      (prevIndexs) =>
-        prevIndexs.includes(index)
-          ? prevIndexs.filter((i) => i !== index) // Remove index if it's already active
-          : [...prevIndexs, index] // Add index if it's not active
-    );
-  };
-```
-```js
-  const [activeIndex, setActiveIndexs] = useState([]);
+  setActiveIndexs(
+    (prevIndexs) =>
+      prevIndexs.includes(index)
+        ? prevIndexs.filter((i) => i !== index) // Remove index if it's already active
+        : [...prevIndexs, index] // Add index if it's not active
+  );
+};
 ```
 
-### Useful resources 
+```js
+const [activeIndex, setActiveIndexs] = useState([]);
+```
+
+### Useful resources
 
 - [stackoverflow.com](https://stackoverflow.com/questions/60812877/change-active-state-in-a-list-using-usestate) - This helped me for finding out how to handle more than one active indexes.
 

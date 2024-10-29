@@ -1,0 +1,109 @@
+.wholePage {
+  position: relative;
+  background-color: hsl(279, 100%, 97%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.faqCard {
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Adjusting position to truly center */
+  min-height: 50%;
+  max-height: 1500px;
+  transition: all 0.3s ease; /* Smoothly resize the card */
+  width: 550px;
+  background-color: white;
+  z-index: 1;
+  border-radius: 30px;
+  border: 2px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.partTop {
+  background-image: url("/background-pattern-desktop.svg");
+  height: 320px;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  color: hsl(287, 42%, 13%);
+}
+.title h1 {
+  margin-left: 20px;
+  font-size: 50px;
+}
+.faqItemContainer {
+  border-bottom: 1px solid #fafafa;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+}
+.faqItemTitle {
+  color: hsl(287, 42%, 13%);
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1; /* Allow the title to take available space */
+}
+
+.faqItemTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.faqItemTitle:hover {
+  color: hsl(279, 75%, 65%);
+}
+.faqItems {
+  margin-top: 40px;
+}
+.plusIcon,
+.minusIcon {
+  cursor: pointer;
+  margin-left: 10px; /* Space between title and icon */
+}
+.faqItemText {
+  margin-top: 10px; /* Space between title/icon and text */
+  color: hsl(285, 6%, 51%);
+}
+
+@media only screen and (max-width: 600px) {
+  .faqItemContainer {
+    flex-direction: column; /* Stack items vertically on mobile */
+  }
+  .faqItemTitleContainer {
+    justify-content: space-between; /* Space between title and icon on mobile */
+  }
+  .faqCard {
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Adjusting position to truly center */
+    min-height: 50%;
+    max-height: 1500px;
+    transition: all 0.3s ease; /* Smoothly resize the card */
+    width: 350px;
+    background-color: white;
+    z-index: 1;
+    border-radius: 10px;
+    border: 2px;
+    font-family: "Work Sans", sans-serif;
+  }
+  .faqItemTitle:hover {
+    color: hsl(287, 42%, 13%); /* Prevent color change on hover */
+    cursor: default; /* Change cursor to default */
+  }
+  .faqItemText {
+    margin-top: 10px; /* Space between title/icon and text */
+    color: hsl(285, 6%, 51%);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.4px;
+  }
+}

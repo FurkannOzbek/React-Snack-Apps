@@ -44,18 +44,44 @@ export default function MortgageCard() {
             <h1> Mortgage Calculator</h1>
             <div className={styles.mortgageClear}> Clear All</div>
           </div>
-
+          {/* Mortgage Form */}
           <form className={styles.mortgageForm} onSubmit={formSubmit}>
-            <label className={styles.currencyLabel}>Mortgage Amount</label>
+            <label className={styles.inputLabel}>Mortgage Amount</label>
+            {/* Input Wrapper for input and span */}
             <div className={styles.inputWrapper}>
               <span className={styles.currencyIcon}> £ </span>
               <input
                 value={formatAmount}
                 onChange={handleCurrencyInputChange}
-                placeholder="Enter Amount"
                 className={styles.inputField}
                 maxLength={20}
               />
+            </div>
+            {/* Term and Rate Input Field */}
+            <div className={styles.inputWrapperTermAndRate}>
+              {/* Container for Term Input*/}
+              <div className={styles.mortgageTermContainer}>
+                <label className={styles.inputLabel}>
+                  Mortgage Term
+                  {/* Overriding css for not creating another class */}
+                </label>
+                {/* Input Wrapper for input and span */}
+                <div className={styles.inputWrapper}>
+                  <input className={`${styles.inputField} ${styles.yearsInputField}`} />
+                  <span className={styles.yearsIcon}> years </span>
+                </div>
+              </div>
+              {/* Container for Rate Input*/}
+              <div className={styles.interestRateContainer}>
+                <label className={styles.inputLabel} style={{ float: "left" }}>
+                  Interest Rate
+                </label>
+                {/* Input Wrapper for input and span */}
+                <div className={styles.inputWrapper}>
+                  <input className={`${styles.inputField} ${styles.rateInputField}`} />
+                  <span className={styles.rateIcon}> % </span>
+                </div>
+              </div>
             </div>
           </form>
         </div>

@@ -4,8 +4,8 @@
   left: 50%; /* left and top 50% makes top left corner of div centerized but that doesnt totally make div centerized*/
   top: 50%;
   transform: translate(-50%, -50%); /* For truely centerize the div*/
-  width: 900px;
-  height: 500px;
+  width: 950px;
+  height: 550px;
   display: flex;
   border-radius: 30px;
 }
@@ -62,13 +62,14 @@
   font-weight: 900;
   font-size: 15px;
 }
+
 .inputField {
   padding-left: 50px; /* Space for the icon */
   height: 40px;
   border-radius: 5px;
   border: 1px solid hsl(196, 10%, 72%);
   width: 100%;
-  font-size: 1rem;
+  font-size: 15px;
   color: hsl(202, 54%, 16%);
   background-color: white;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -81,11 +82,66 @@
 }
 
 /* For be able to change currencyIcon background color when input focused */
-.inputWrapper:focus-within .currencyIcon {
+.inputWrapper:focus-within .currencyIcon,
+.inputWrapper:focus-within .rateIcon,
+.inputWrapper:focus-within .yearsIcon {
   background-color: hsl(62, 71%, 53%);
 }
-.currencyLabel {
-  font-size: 13px;
+.inputLabel {
+  font-size: 11px;
   font-weight: 600;
   color: hsl(200, 7%, 52%);
+  margin-left: 2px;
+}
+.inputWrapperTermAndRate {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.interestRateContainer,
+.mortgageTermContainer {
+  display: flex;
+  flex-direction: column; /* Align label and input vertically */
+  width: 47%; /* Width of each input group */
+}
+
+.rateIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: hsl(199, 73%, 94%);
+  pointer-events: none;
+  height: 95%;
+  right: 1px;
+  width: 20%;
+  padding: 1px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: hsl(199, 22%, 33%);
+  font-weight: 700;
+  font-size: 15px;
+}
+.rateInputField,
+.yearsInputField {
+  padding-left: 13px;
+  font-weight: 700;
+}
+
+.yearsIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: hsl(199, 73%, 94%);
+  pointer-events: none;
+  height: 95%;
+  right: 1px;
+  width: 30%;
+  padding: 1px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: hsl(199, 22%, 33%);
+  font-weight: 700;
+  font-size: 13px;
 }

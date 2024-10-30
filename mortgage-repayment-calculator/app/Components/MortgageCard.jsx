@@ -1,19 +1,27 @@
 "use client";
 import styles from "./MortgageCard.module.css";
 import { useState } from "react";
+import { useEffect } from "react";
 export default function MortgageCard() {
-  const [amount, setAmount] = useState("");
+  const [formatAmount, setFormatAmount] = useState("");
+  const [amount, setAmount] = useState(1);
+
   function formSubmit(e) {
     e.preventDefault();
     console.log("form submitted");
   }
-  const formatCurrency = (value) => {
-    // Remove any non-digit characters
-    const numberString = value.replace(/[^0-9]/g, "");
+  // Formating the Currency
+  const formatCurrency = (numberString) => {
+    const formattedNumber = numberString
+      .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
+      .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
+      .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot
     // Format the number with commas
-    const formattedValue = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const formattedValue = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return formattedValue;
   };
+
+  // Handle the Input Change
   const handleCurrencyInputChange = (e) => {
     let inputValue = e.target.value;
     // Format the input value
@@ -22,9 +30,12 @@ export default function MortgageCard() {
     if (formattedValue.length > 0 && formattedValue[0] === "0" && formattedValue !== "0") {
       formattedValue = formattedValue.slice(1); // Remove the leading zero
     }
-    // Update the state with the formatted value
-    setAmount(formattedValue);
+    // The amount without comas for be able to calculation
+    const valueWithoutComas = inputValue.replace(/,/g, "");
+    setAmount(valueWithoutComas);
+    setFormatAmount(formattedValue);
   };
+
   return (
     <>
       <div className={styles.mortgageCard}>
@@ -39,10 +50,11 @@ export default function MortgageCard() {
             <div className={styles.inputWrapper}>
               <span className={styles.currencyIcon}> £ </span>
               <input
-                value={amount}
+                value={formatAmount}
                 onChange={handleCurrencyInputChange}
                 placeholder="Enter Amount"
                 className={styles.inputField}
+                maxLength={20}
               />
             </div>
           </form>

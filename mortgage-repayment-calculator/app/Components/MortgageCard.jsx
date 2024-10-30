@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 export default function MortgageCard() {
   const [formatAmount, setFormatAmount] = useState("");
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState("");
   const [rate, setRate] = useState("");
   const [years, setYears] = useState("");
   const [yearsErrorMessage, setYearsErrorMessage] = useState("");
@@ -14,13 +14,12 @@ export default function MortgageCard() {
   const [isYearsError, setIsYearsError] = useState(false);
   const [isAmountError, setIsAmountError] = useState(false);
 
+  // Form Submit
   function formSubmit(e) {
     if (years == "" || years == undefined) {
       setYearsErrorMessage("This field is required");
       setIsYearsError(true);
       setYears("");
-      console.log(years);
-      console.log("error message", yearsErrorMessage);
     }
     if (rate == "" || rate == undefined) {
       setRateErrorMessage("This field is required");
@@ -36,14 +35,26 @@ export default function MortgageCard() {
     console.log("submit");
     console.log(rate);
     console.log(years);
+    console.log(amount);
   }
-  // Function for Formating the Currency
-  const formatCurrency = (numberString) => {
-    const formattedNumber = numberString
+  // Format Currency
+  const formatCurrency = (inputAmount) => {
+    const maxAmount = 9999999999;
+
+    if (inputAmount == "") {
+      return "";
+    }
+    const formattedNumber = inputAmount
       .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
       .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
       .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot
     const formattedValue = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Format the number with commas
+    if (formattedNumber > maxAmount) {
+      setAmountErrorMessage("Max amount is 9,999,999,999");
+      setIsAmountError(true);
+    }
+    const amount = Math.min(formattedNumber, maxAmount);
+    console.log(formattedNumber);
     return formattedValue;
   };
 
@@ -62,7 +73,7 @@ export default function MortgageCard() {
     console.log("years", years);
     return years.toString();
   };
-  // Formating Rate
+  // Format Rate
   const formatRate = (inputRate) => {
     if (inputRate > 100 || inputRate < 0) {
       setRateErrorMessage("Please type an input between 0-100");
@@ -79,6 +90,11 @@ export default function MortgageCard() {
   // Handle the Input Change
   const handleCurrencyInputChange = (e) => {
     let inputValue = e.target.value;
+
+    if (amount === undefined || amount == 0) {
+      setIsAmountError(false);
+      setAmount("");
+    }
     let formattedValue = formatCurrency(inputValue);
     // Remove leading zero if present and not just '0'
     if (formattedValue.length > 0 && formattedValue[0] === "0" && formattedValue !== "0") {
@@ -124,14 +140,32 @@ export default function MortgageCard() {
             <label className={styles.inputLabel}>Mortgage Amount</label>
             {/* Input Wrapper for input and span */}
             <div className={styles.inputWrapper}>
-              <span className={styles.currencyIcon}> £ </span>
+              <span
+                className={
+                  !isAmountError
+                    ? `${styles.currencyIcon}`
+                    : `${styles.currencyIcon} ${styles.amountIconError}`
+                }
+              >
+                {" "}
+                £{" "}
+              </span>
               <input
                 value={formatAmount}
                 onChange={handleCurrencyInputChange}
-                className={styles.inputField}
-                maxLength={20}
+                className={
+                  !isAmountError
+                    ? `${styles.inputField}`
+                    : `${styles.inputField} ${styles.amountError} `
+                }
+                maxLength={13}
               />
             </div>
+            {!isAmountError ? (
+              <div></div>
+            ) : (
+              <span className={styles.amountErrorMessage}> {amountErrorMessage}</span>
+            )}
             {/* Term and Rate Input Field */}
             <div className={styles.inputWrapperTermAndRate}>
               {/* Container for Term Input*/}

@@ -77,7 +77,6 @@
 }
 .inputField:focus {
   outline: none;
-
   border: 2px solid hsl(62, 71%, 53%);
 }
 
@@ -87,6 +86,44 @@
 .inputWrapper:focus-within .yearsIcon {
   background-color: hsl(62, 71%, 53%);
 }
+/* Customizing css when there is error message*/
+.yearsError {
+  border: 1px solid hsl(4, 69%, 50%);
+}
+.yearsError:focus {
+  outline: none;
+  border: 2px solid hsl(4, 93%, 48%);
+}
+.yearsIconError {
+  background-color: hsl(4, 69%, 50%) !important;
+  color: white !important;
+}
+.yearsErrorMessage {
+  color: hsl(4, 69%, 50%);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+/* Rate error css customize */
+.rateError {
+  border: 1px solid hsl(4, 69%, 50%);
+}
+.rateError:focus {
+  outline: none;
+  border: 2px solid hsl(4, 93%, 48%);
+}
+.rateIconError {
+  background-color: hsl(4, 69%, 50%) !important;
+  color: white !important;
+}
+.rateErrorMessage {
+  color: hsl(4, 69%, 50%);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .inputLabel {
   font-size: 11px;
   font-weight: 600;

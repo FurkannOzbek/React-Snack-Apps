@@ -3,20 +3,23 @@ import styles from "./MortgageCard.module.css";
 import { useState } from "react";
 
 export default function MortgageCard() {
-  const [formatAmount, setFormatAmount] = useState("");
   const [amount, setAmount] = useState("");
   const [rate, setRate] = useState("");
   const [years, setYears] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [resultMonthlyPayment, setResultMonthlyPayment] = useState("");
+  const [resultTotalPayment, setResultTotalPayment] = useState("");
+
   const [yearsErrorMessage, setYearsErrorMessage] = useState("");
   const [rateErrorMessage, setRateErrorMessage] = useState("");
   const [amountErrorMessage, setAmountErrorMessage] = useState("");
   const [typeErrorMessage, setTypeErrorMessage] = useState("");
+
+  const [isSubmit, setIsSubmit] = useState(false);
   const [isRateError, setIsRateError] = useState(false);
   const [isYearsError, setIsYearsError] = useState(false);
   const [isAmountError, setIsAmountError] = useState(false);
   const [isTypeError, setIsTypeError] = useState(false);
-  const [selectedType, setSelectedType] = useState("");
-  const [selectedOption, setSelectedOption] = useState(null);
 
   // Form Submit
   function formSubmit(e) {
@@ -40,18 +43,36 @@ export default function MortgageCard() {
       setIsTypeError(true);
       setSelectedType("");
     }
+    setIsSubmit(true);
     e.preventDefault();
-    console.log("Amount: ", amount, typeof amount);
-    console.log("Term Years", years, typeof years);
-    console.log("Rate:", rate, typeof rate);
-    console.log("Type:", selectedType, typeof selectedType);
+    console.log(amount, typeof amount);
+    console.log(rate, typeof rate);
+    console.log(years, typeof years);
+    console.log(selectedType, typeof selectedType);
+
+    const parsedAmount = parseFloat(amount.replace(",", ""));
+
+    const interest = (parsedAmount * (rate * years)) / 100;
+    const total = parsedAmount + interest;
+    if (selectedType === "Interest Only") {
+      setResultTotalPayment(total);
+      const monthlyInterest = interest / years / 12;
+      setResultMonthlyPayment(monthlyInterest);
+    }
+  }
+
+  // Clear All
+  function clearAll() {
+    setYears("");
+    setAmount("");
+    setRate("");
+    setSelectedType("");
   }
   // Format Currency
   const formatCurrency = (inputAmount) => {
     if (inputAmount == "") {
       return "";
     }
-
     const formattedNumber = inputAmount
       .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
       .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
@@ -108,7 +129,7 @@ export default function MortgageCard() {
     // The amount without comas for be able to calculation
     const valueWithoutComas = inputValue.replace(/,/g, "");
     setAmount(valueWithoutComas);
-    setFormatAmount(formattedValue);
+    setAmount(formattedValue);
   };
   const handleYearsInputChange = (e) => {
     setIsYearsError(false); // Reset the error situation if new number entered
@@ -134,9 +155,8 @@ export default function MortgageCard() {
   };
 
   const handleRadioChange = (option) => {
-    setSelectedOption(option);
+    setIsTypeError(false);
     setSelectedType(option);
-    console.log(selectedOption);
   };
 
   return (
@@ -145,7 +165,9 @@ export default function MortgageCard() {
         <div className={styles.calculationTab}>
           <div className={styles.mortgageTitle}>
             <h1> Mortgage Calculator</h1>
-            <div className={styles.mortgageClear}> Clear All</div>
+            <div className={styles.mortgageClear} onClick={clearAll}>
+              Clear All
+            </div>
           </div>
           {/* Mortgage Form */}
           <form className={styles.mortgageForm} onSubmit={formSubmit}>
@@ -163,7 +185,7 @@ export default function MortgageCard() {
                 £{" "}
               </span>
               <input
-                value={formatAmount}
+                value={amount}
                 onChange={handleCurrencyInputChange}
                 className={
                   !isAmountError
@@ -261,7 +283,7 @@ export default function MortgageCard() {
                       value={option}
                       type="radio"
                       className={styles.radioType}
-                      checked={selectedOption === option}
+                      checked={selectedType === option}
                       onChange={() => handleRadioChange(option)}
                     />
                     <span className={styles.customRadio}></span>
@@ -282,7 +304,39 @@ export default function MortgageCard() {
             </button>
           </form>
         </div>
-        <div className={styles.resultTab}></div>
+        {/* Right Tab For Result*/}
+        <div
+          className={
+            !isSubmit
+              ? `${styles.resultTab} ${styles.resultTabBefore}`
+              : `${styles.resultTab} ${styles.resultTabAfter}`
+          }
+        >
+          {!isSubmit ? (
+            <>
+              <img className={styles.resultImageBefore} src="illustration-empty.svg" />
+              <p className={styles.resultTitleBefore}> Results shown here</p>
+              <p className={styles.resultTextBefore}>
+                Complete the form and click "calculate repayments" to see what your monthly
+                repayments would be.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className={styles.resultTitleAfter}> Your result</h1>
+              <p className={styles.resultTextAfter}>
+                Your results shown below based on the information you provided. To adjust the
+                results, edit the form and click "calculate repayments" again.
+              </p>
+              <div className={styles.resultCard}>
+                <p className={styles.monthlyTitle}> Your monthly repayments</p>
+                <p className={styles.monthlyMoney}> £{resultMonthlyPayment} </p>
+                <p className={styles.totalTitle}> Total you'll repay over the term </p>
+                <p className={styles.totalMoney}> £{resultTotalPayment} </p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );

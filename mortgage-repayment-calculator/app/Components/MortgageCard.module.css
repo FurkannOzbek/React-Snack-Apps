@@ -314,3 +314,80 @@
   border-color: hsl(62, 71%, 53%);
   background-color: hsl(60, 72%, 93%);
 }
+/* Result Tab CSS Before Submit*/
+.resultTabBefore {
+  padding: 40px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resultTitleBefore {
+  color: hsl(184, 70%, 96%);
+  font-weight: 700;
+  font-size: 20px;
+}
+.resultTextBefore {
+  color: hsl(203, 38%, 75%);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+}
+.resultImageBefore {
+  width: 150px;
+  height: 200px;
+  margin-top: 40px;
+}
+
+/* Result Tab CSS After Submit */
+.resultTitleAfter {
+  color: hsl(180, 100%, 99%);
+  font-weight: 600;
+  font-size: 17px;
+}
+.resultTabAfter {
+  padding: 30px 30px 30px 30px;
+}
+.resultTextAfter {
+  color: hsl(204, 20%, 51%);
+  font-size: 12px;
+  margin-top: 10px;
+  line-height: 17px;
+  font-weight: 600;
+}
+.resultCard {
+  margin-top: 30px;
+  background-color: hsl(202, 56%, 12%);
+  height: 250px;
+  width: 100%;
+  border-radius: 10px;
+  border-top: 3px solid hsl(60, 70%, 51%);
+  padding: 20px 30px 20px 30px;
+}
+
+.monthlyTitle {
+  color: hsl(204, 20%, 59%);
+  font-size: 12px;
+  font-weight: 600;
+}
+.monthlyMoney {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  color: hsl(60, 70%, 51%);
+  font-size: 40px;
+  font-weight: 700;
+  border-bottom: 1px solid hsl(202, 34%, 20%);
+}
+.totalTitle {
+  margin-top: 20px;
+  color: hsl(203, 23%, 62%);
+  font-size: 14px;
+}
+.totalMoney {
+  margin-top: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}

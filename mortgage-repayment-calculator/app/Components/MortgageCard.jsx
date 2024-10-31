@@ -1,7 +1,7 @@
 "use client";
 import styles from "./MortgageCard.module.css";
 import { useState } from "react";
-import { useEffect } from "react";
+
 export default function MortgageCard() {
   const [formatAmount, setFormatAmount] = useState("");
   const [amount, setAmount] = useState("");
@@ -10,48 +10,53 @@ export default function MortgageCard() {
   const [yearsErrorMessage, setYearsErrorMessage] = useState("");
   const [rateErrorMessage, setRateErrorMessage] = useState("");
   const [amountErrorMessage, setAmountErrorMessage] = useState("");
+  const [typeErrorMessage, setTypeErrorMessage] = useState("");
   const [isRateError, setIsRateError] = useState(false);
   const [isYearsError, setIsYearsError] = useState(false);
   const [isAmountError, setIsAmountError] = useState(false);
+  const [isTypeError, setIsTypeError] = useState(false);
   const [selectedType, setSelectedType] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
   // Form Submit
   function formSubmit(e) {
-    if (years == "" || years == undefined) {
+    if (years === "" || years === undefined) {
       setYearsErrorMessage("This field is required");
       setIsYearsError(true);
       setYears("");
     }
-    if (rate == "" || rate == undefined) {
+    if (rate === "" || rate === undefined) {
       setRateErrorMessage("This field is required");
       setIsRateError(true);
       setRate("");
     }
-    if (amount == "" || amount == undefined) {
+    if (amount === "" || amount === undefined) {
       setAmountErrorMessage("This field is required");
       setIsAmountError(true);
       setAmount("");
     }
+    if (selectedType === "" || selectedType === undefined) {
+      setTypeErrorMessage("This field is required");
+      setIsTypeError(true);
+      setSelectedType("");
+    }
     e.preventDefault();
+    console.log("Amount: ", amount, typeof amount);
+    console.log("Term Years", years, typeof years);
+    console.log("Rate:", rate, typeof rate);
+    console.log("Type:", selectedType, typeof selectedType);
   }
   // Format Currency
   const formatCurrency = (inputAmount) => {
-    const maxAmount = 9999999999;
     if (inputAmount == "") {
       return "";
     }
+
     const formattedNumber = inputAmount
       .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
       .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
       .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot
     const formattedValue = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Format the number with commas
-    if (formattedNumber > maxAmount) {
-      setAmountErrorMessage("Max amount is 9,999,999,999");
-      setIsAmountError(true);
-    }
-
-    console.log(formattedNumber);
     return formattedValue;
   };
 
@@ -68,20 +73,23 @@ export default function MortgageCard() {
     const formattedYears = inputYears.replace(/[^0-9]/g, "");
     const years = Math.min(formattedYears, 30);
     console.log("years", years);
-    return years.toString();
+    return parseFloat(years);
   };
   // Format Rate
   const formatRate = (inputRate) => {
-    if (inputRate > 100 || inputRate < 0) {
-      setRateErrorMessage("Please type an input between 0-100");
+    if (inputRate > 40 || inputRate < 0) {
+      setRateErrorMessage("Please type an input between 0-40");
       setIsRateError(true);
+      return 40; // if rate is higher than max limit , it automaticly set to 100
     }
     if (inputRate == "") {
       return "";
     }
-    const formattedRate = inputRate.replace(/[^0-9]/g, "");
-    const rate = Math.min(formattedRate, 100);
-    return rate.toString();
+    const formattedRate = inputRate
+      .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
+      .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
+      .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot;
+    return parseFloat(formattedRate);
   };
 
   // Handle the Input Change
@@ -261,6 +269,11 @@ export default function MortgageCard() {
                   </label>
                 </div>
               ))}
+              {!isTypeError ? (
+                <div></div>
+              ) : (
+                <span className={styles.typeErrorMessage}> {typeErrorMessage}</span>
+              )}
             </div>
             <button className={styles.submitButton} type="submit" onSubmit={formSubmit}>
               {" "}

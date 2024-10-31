@@ -5,9 +5,9 @@
   top: 50%;
   transform: translate(-50%, -50%); /* For truely centerize the div*/
   width: 850px;
-  height: 500px;
+  min-height: 485px;
   display: flex;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 .calculationTab {
   padding: 30px;
@@ -16,8 +16,8 @@
 .resultTab {
   background-color: hsl(201, 54%, 16%);
   width: 50%;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   border-bottom-left-radius: 60px;
 }
 .mortgageTitle {
@@ -146,6 +146,15 @@
   font-weight: 700;
 }
 
+/* Type error css customize */
+
+.typeErrorMessage {
+  color: hsl(4, 69%, 50%);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-weight: 700;
+}
 .inputLabel {
   font-size: 11px;
   font-weight: 600;
@@ -208,7 +217,6 @@
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between each radio option */
 }
 .mortgageTypeLabel {
   margin-top: 30px;
@@ -223,6 +231,7 @@
   border: 1px solid hsl(193, 10%, 64%);
   border-radius: 5px;
   height: 40px;
+  margin-top: 10px;
 }
 .submitButton {
   margin-top: 30px;

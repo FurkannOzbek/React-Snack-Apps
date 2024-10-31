@@ -13,6 +13,8 @@ export default function MortgageCard() {
   const [isRateError, setIsRateError] = useState(false);
   const [isYearsError, setIsYearsError] = useState(false);
   const [isAmountError, setIsAmountError] = useState(false);
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
 
   // Form Submit
   function formSubmit(e) {
@@ -32,15 +34,10 @@ export default function MortgageCard() {
       setAmount("");
     }
     e.preventDefault();
-    console.log("submit");
-    console.log(rate);
-    console.log(years);
-    console.log(amount);
   }
   // Format Currency
   const formatCurrency = (inputAmount) => {
     const maxAmount = 9999999999;
-
     if (inputAmount == "") {
       return "";
     }
@@ -53,7 +50,7 @@ export default function MortgageCard() {
       setAmountErrorMessage("Max amount is 9,999,999,999");
       setIsAmountError(true);
     }
-    const amount = Math.min(formattedNumber, maxAmount);
+
     console.log(formattedNumber);
     return formattedValue;
   };
@@ -127,6 +124,13 @@ export default function MortgageCard() {
     const formattedRate = formatRate(rate);
     setRate(formattedRate);
   };
+
+  const handleRadioChange = (option) => {
+    setSelectedOption(option);
+    setSelectedType(option);
+    console.log(selectedOption);
+  };
+
   return (
     <>
       <div className={styles.mortgageCard}>
@@ -232,7 +236,37 @@ export default function MortgageCard() {
                 )}
               </div>
             </div>
-            <button type="submit" onSubmit={formSubmit}></button>
+            <div className={styles.radioBoxWrapper}>
+              <p className={styles.typeText}> Mortgage Type</p>
+              {["Repayment", "Interest Only"].map((option) => (
+                <div
+                  className={
+                    selectedType === option
+                      ? `${styles.inputWrapperType} ${styles.selectedType}`
+                      : `${styles.inputWrapperType}`
+                  }
+                  key={option}
+                  // onClick={handleRadioClick(option)}
+                >
+                  <label className={styles.radioText}>
+                    <input
+                      value={option}
+                      type="radio"
+                      className={styles.radioType}
+                      checked={selectedOption === option}
+                      onChange={() => handleRadioChange(option)}
+                    />
+                    <span className={styles.customRadio}></span>
+                    {option}
+                  </label>
+                </div>
+              ))}
+            </div>
+            <button className={styles.submitButton} type="submit" onSubmit={formSubmit}>
+              {" "}
+              <img src="icon-calculator.svg" style={{ width: "18px", marginRight: "10px" }} />{" "}
+              Calculate Repayments
+            </button>
           </form>
         </div>
         <div className={styles.resultTab}></div>

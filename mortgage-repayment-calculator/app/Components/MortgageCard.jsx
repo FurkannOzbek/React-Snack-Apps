@@ -42,8 +42,9 @@ export default function MortgageCard() {
       setTypeErrorMessage("This field is required");
       setIsTypeError(true);
       setSelectedType("");
+    } else {
+      setIsSubmit(true);
     }
-    setIsSubmit(true);
     e.preventDefault();
 
     const parsedAmount = parseFloat(amount.replace(/,/g, ""));

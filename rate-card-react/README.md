@@ -26,10 +26,10 @@ Users are able to  :
 - See the "Thank you" card state after submitting a rating
 
 ### Screenshots
+![rate1](https://github.com/user-attachments/assets/1384c64b-9aaa-4aba-bfaf-ba3c9273ebee)
+![rate2](https://github.com/user-attachments/assets/6117851e-c52d-49ed-87b9-a799ec0be876)
+![rate3](https://github.com/user-attachments/assets/fa526edc-25af-41d9-b470-9a0fb5115b45)
 
-![rating project1](https://github.com/user-attachments/assets/a7d3068e-39b5-48de-87a0-cb76cac15e28)
-![rating project2](https://github.com/user-attachments/assets/61aa1bcc-936f-4555-b302-f4b22f44eb32)
-![rating project3](https://github.com/user-attachments/assets/f1620ae8-3945-4fa4-ae3b-d24b97bdb566)
 
 ### Links
 

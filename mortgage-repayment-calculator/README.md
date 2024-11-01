@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mortgage Calculator 
+This is a solution to the [Mortgage repayment calculator on Frontend Mentor](https://www.frontendmentor.io/challenges/mortgage-repayment-calculator-Galx1LXK73/hub).
 
-## Getting Started
+## Table of contents
 
-First, run the development server:
+- [Overview](#overview)
+  - [The Challange](#the-challange)
+  - [Screenshots](#screenshots)
+  - [Links](#links)
+- [My Process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+## Overview
+
+### The Challange
+
+Users are able to  :
+
+- Input the mortgage amount, interest rate, term, and type (repayment or interest-only).
+- Calculate their monthly repayments by clicking the "calculate repayments" button.
+- View the results immediately after inputting their data.
+
+
+### Screenshots
+![mortgage1](https://github.com/user-attachments/assets/0d2f984b-79ad-40d6-b0e6-a6f7f9e9be8c)
+![mortgage2](https://github.com/user-attachments/assets/66a2db4f-8da1-476e-acb9-8fa440f61ce3)
+![mortgage3](https://github.com/user-attachments/assets/fd56ee25-3727-4e27-9de6-d43b5c57a230)
+![mortgage4](https://github.com/user-attachments/assets/e30908b1-6323-4c85-b5d1-a2b2a43bfeca)
+
+
+
+### Links
+
+- Challange URL : https://www.frontendmentor.io/challenges/mortgage-repayment-calculator-Galx1LXK73/hub
+- Live Site URL : https://react-snack-apps.vercel.app/
+
+## My process
+
+### Built with
+
+- React
+- NextJS
+- CSS
+
+### What I learned 
+
+On top of what I already knew, I figured out easy way to handle seperating thousands with comas and 2 digit after the dot.
+```js
+ setResultTotalPayment(
+        // For the format seperating thousands with comas and after dot only 2 digits
+        totalRepayment.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      );
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Author
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Website - [Furkan Özbek](https://furkanozbek.dk)
+- Frontend Mentor - [@FurkannOzbek](https://www.frontendmentor.io/profile/FurkannOzbek)

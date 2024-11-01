@@ -45,19 +45,49 @@ export default function MortgageCard() {
     }
     setIsSubmit(true);
     e.preventDefault();
-    console.log(amount, typeof amount);
-    console.log(rate, typeof rate);
-    console.log(years, typeof years);
-    console.log(selectedType, typeof selectedType);
 
-    const parsedAmount = parseFloat(amount.replace(",", ""));
-
-    const interest = (parsedAmount * (rate * years)) / 100;
-    const total = parsedAmount + interest;
+    const parsedAmount = parseFloat(amount.replace(/,/g, ""));
+    // Interest only monthly payment calculation
     if (selectedType === "Interest Only") {
-      setResultTotalPayment(total);
+      const interest = (parsedAmount * (rate * years)) / 100;
+      const total = parsedAmount + interest;
+
+      setResultTotalPayment(
+        total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      );
+
       const monthlyInterest = interest / years / 12;
-      setResultMonthlyPayment(monthlyInterest);
+      setResultMonthlyPayment(
+        // For the format seperating thousands with comas and after dot only 2 digits
+        monthlyInterest.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      );
+    } else if (selectedType === "") {
+    }
+    // Repayment monthly payment calculation
+    if (selectedType === "Repayment") {
+      const r = rate / 100 / 12;
+      const n = years * 12;
+      const P = parsedAmount;
+
+      const monthlyRepayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      const totalRepayment = monthlyRepayment * n;
+      setResultTotalPayment(
+        // For the format seperating thousands with comas and after dot only 2 digits
+        totalRepayment.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      );
+      setResultMonthlyPayment(
+        // For the format seperating thousands with comas and after dot only 2 digits
+        monthlyRepayment.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      );
     }
   }
 
@@ -93,7 +123,7 @@ export default function MortgageCard() {
     }
     const formattedYears = inputYears.replace(/[^0-9]/g, "");
     const years = Math.min(formattedYears, 30);
-    console.log("years", years);
+
     return parseFloat(years);
   };
   // Format Rate
@@ -106,11 +136,14 @@ export default function MortgageCard() {
     if (inputRate == "") {
       return "";
     }
+    console.log(typeof inputRate);
     const formattedRate = inputRate
       .replace(/[^0-9.]/g, "") // Remove non-digit and non-dot characters
       .replace(/(\..*)\./g, "$1") // Remove all dots except the first one
-      .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot;
-    return parseFloat(formattedRate);
+      .replace(/^(\d+\.?\d{0,2}).*/, "$1"); // Limit to two digits after the dot
+    console.log(formattedRate);
+
+    return formattedRate;
   };
 
   // Handle the Input Change
@@ -145,7 +178,7 @@ export default function MortgageCard() {
   const handleRateInputChange = (e) => {
     setIsRateError(false); // Reset the error situation if new rate entered
     const rate = e.target.value;
-    console.log(rate);
+
     if (rate === undefined || rate == 0) {
       setIsRateError(false);
       setRate("");
